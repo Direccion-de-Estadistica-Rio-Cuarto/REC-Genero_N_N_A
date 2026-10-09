@@ -51,6 +51,9 @@
   --ok: #008300;
   --alerta: #eda100;
   --grave: #d14342;                /* mismo valor que usa .boton--peligro */
+  --whatsapp: #25d366;             /* verde oficial de WhatsApp */
+  --correo-texto: #5f6368;         /* gris neutro institucional para correo */
+  --maps-texto: #5f6368;           /* gris neutro para botón de Google Maps */
 
   /* --- Tipografía, espaciado y formas -------------------------------------
     Google Sans (declarada en css/fuentes.css). Si por algún motivo no llega
@@ -97,6 +100,8 @@
     --serie-6: #ffca3a;
     --serie-7: #4fa6bf;
     --serie-8: #ef6a6a;
+    --correo-texto: #9aa0a6;
+    --maps-texto: #9aa0a6;
 
     /* --ok / --alerta / --grave: mismo valor que en modo claro. El tinte
       del fondo se calcula con color-mix sobre la superficie del tema, así
@@ -124,6 +129,8 @@
   --serie-6: #ffca3a;
   --serie-7: #4fa6bf;
   --serie-8: #ef6a6a;
+  --correo-texto: #9aa0a6;
+  --maps-texto: #9aa0a6;
 
   /* --ok / --alerta / --grave: mismo valor que en modo claro. El tinte del
     fondo se calcula con color-mix sobre la superficie del tema, así que se

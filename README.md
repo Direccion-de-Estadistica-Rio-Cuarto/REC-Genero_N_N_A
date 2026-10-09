@@ -1,10 +1,8 @@
-# Template de tableros — Equipo de Estadísticas
+# Recursero — Género, Niñez, Adolescencia y Familia
 
-Plantilla para crear tableros con datos, todos con el **mismo diseño**, las
-**mismas reglas de seguridad** y **accesibles** (WCAG AA) de fábrica. Vos te
-ocupás de tus datos y de cómo los cargás; el diseño, los colores, el
-contraste y los chequeos de seguridad ya vienen resueltos. HTML, CSS y JS
-simples, sin build.
+Visor interactivo y catálogo de recursos y programas de abordaje familiar, niñez, adolescencia y género del Gobierno de Río Cuarto.
+Herramienta de consulta rápida y derivación para trabajadoras/es sociales, psicopedagogas/os y agentes municipales.
+Basado en el sistema de diseño oficial de Río Cuarto (HTML, CSS y JS sin dependencias ni build).
 
 > **¿Primera vez?** Andá directo a [Empezar](#empezar-tu-primer-tablero) más abajo.
 

@@ -4,15 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- METADATA — CAMBIÁ estas cuatro líneas por las de tu tablero.
-       (revisar-tablero.sh chequea que estén y que no sigan siendo el ejemplo) -->
-  <title>Tablero — Gobierno de Río Cuarto</title>
-  <meta name="description" content="Una línea que describe qué muestra este tablero y para qué sirve.">
-  <meta name="author" content="Equipo de Estadísticas — Gobierno de Río Cuarto">
-  <meta name="dcterms.modified" content="2026-09">  <!-- año-mes de los datos -->
-  <!-- Si tu tablero se vincula a un Objetivo de Desarrollo Sostenible, sumá:
-       <meta name="ods" content="11, 16"> y mostrá sus íconos (assets/img/ods/). -->
-  <!-- Si el tablero se va a compartir por chat/redes, sumá también og:title y og:description. -->
+  <title>Recursero — Género, Niñez, Adolescencia y Familia — Gobierno de Río Cuarto</title>
+  <meta name="description" content="Guía y visor de recursos y programas de abordaje familiar, niñez, adolescencia y género del Gobierno de Río Cuarto.">
+  <meta name="author" content="Dirección de Estadística, Control de Calidad y Procesos — Secretaría de Gestión y Participación Ciudadana — Gobierno de Río Cuarto">
+  <meta name="dcterms.modified" content="2026-10">
+  <meta name="ods" content="3, 5, 10, 16">
 
   <!-- Aplica el tema guardado ANTES de pintar la página, para que no se vea
        primero claro y después oscuro (o al revés) por un instante. No se toca. -->
@@ -32,8 +28,7 @@
   <link rel="stylesheet" href="css/componentes.css">
   <link rel="stylesheet" href="css/iconos.css">
 
-  <!-- Los estilos propios de ESTE tablero. Va último para poder ajustar
-       lo de arriba. Es el archivo donde escribís tu CSS. -->
+  <!-- Los estilos propios de ESTE tablero. -->
   <link rel="stylesheet" href="css/tablero.css">
 </head>
 <body>
@@ -44,7 +39,8 @@
       <img class="logo" src="assets/img/logo-gobierno.webp" alt="Gobierno de Río Cuarto">
       <span class="separador" aria-hidden="true"></span>
       <div class="titulos">
-        <h1>Equipo de Estadísticas</h1>
+        <h1>Secretaría de Gestión y Participación Ciudadana</h1>
+        <p>Dirección de Estadística, Control de Calidad y Procesos</p>
       </div>
 
       <!-- Interruptor de modo claro/oscuro. Igual en todos los tableros: no se toca. -->
@@ -66,18 +62,150 @@
   <main>
     <div class="contenedor">
 
-      <!-- CAMBIÁ el título, la bajada y la fecha por los de tu tablero -->
       <section class="intro">
-        <h2>Título del tablero</h2>
-        <p class="bajada">Una línea que explica qué muestra este tablero y para qué sirve.</p>
-        <p class="actualizado">Actualizá esta fecha: datos a mes/año.</p>
+        <h2>Recursero</h2>
+        <p class="intro-subtitulo">Subsecretaría de Género, Niñez, Adolescencia y Familia</p>
+        <p class="bajada">Guía y visor de recursos y programas de abordaje familiar, niñez, adolescencia y género del Gobierno de Río Cuarto.</p>
+        <p class="actualizado">Datos a octubre de 2026</p>
       </section>
 
-      <!-- Empezá tu tablero acá. Usá las clases de css/componentes.css
-           (.kpi, .panel, .boton, .titulo-*, .estado — ver guia-diseno.html)
-           y escribí la lógica en js/tablero.js. Cómo cargués tus datos
-           (fetch, un <script> con tus datos, lo que te convenga) es tu
-           decisión — ver AGENTS.md. -->
+      <!-- Indicadores generales (KPIs) -->
+      <div class="indicadores" id="indicadores" aria-label="Métricas generales del recursero"></div>
+
+      <!-- Sección de Guardias y Urgencias Inmediatas -->
+      <section class="seccion-guardias" aria-labelledby="titulo-guardias">
+        <div class="seccion-guardias-header">
+          <span class="icono" aria-hidden="true" style="color:var(--grave)">emergency</span>
+          <h3 id="titulo-guardias">Canales de Guardia y Atención Inmediata</h3>
+          <span class="badge-urgente">Derivación 24 hs</span>
+        </div>
+        <div class="grilla-guardias" id="grilla-guardias"></div>
+      </section>
+
+      <!-- Panel de Búsqueda y Filtros Cruzados -->
+      <section class="panel-busqueda" aria-label="Buscador y filtros de recursos">
+        <div class="busqueda-fila-principal">
+          <div class="input-buscador-wrapper">
+            <span class="icono icono-busqueda" aria-hidden="true">search</span>
+            <input type="search" id="input-busqueda" class="input-buscador"
+                   placeholder="Buscar por programa, palabra clave, trámite, barrio o temática..."
+                   aria-label="Buscar recursos y programas">
+            <button type="button" id="boton-limpiar-busqueda" class="boton-limpiar-busqueda"
+                    aria-label="Limpiar búsqueda" hidden>
+              <span class="icono" aria-hidden="true">close</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grupo-chips" role="group" aria-label="Filtro rápido por temática">
+          <span class="chips-label">Ejes prioritarios:</span>
+          <button type="button" class="chip activo" data-eje="todos">Todos <span class="chip-conteo" id="conteo-todos">0</span></button>
+          <button type="button" class="chip" data-eje="violencia"><span class="icono icono--chico" aria-hidden="true">shield</span> Violencias / Género <span class="chip-conteo" id="conteo-violencia">0</span></button>
+          <button type="button" class="chip" data-eje="ninez"><span class="icono icono--chico" aria-hidden="true">child_care</span> Niñez y Adolescencia <span class="chip-conteo" id="conteo-ninez">0</span></button>
+          <button type="button" class="chip" data-eje="salud"><span class="icono icono--chico" aria-hidden="true">health_and_safety</span> Salud y Bienestar <span class="chip-conteo" id="conteo-salud">0</span></button>
+          <button type="button" class="chip" data-eje="inclusion"><span class="icono icono--chico" aria-hidden="true">accessible</span> Inclusión y Accesibilidad <span class="chip-conteo" id="conteo-inclusion">0</span></button>
+          <button type="button" class="chip" data-eje="educacion"><span class="icono icono--chico" aria-hidden="true">school</span> Educación y DDHH <span class="chip-conteo" id="conteo-educacion">0</span></button>
+          <button type="button" class="chip" data-eje="comunidad"><span class="icono icono--chico" aria-hidden="true">diversity_3</span> Convivencia y Familia <span class="chip-conteo" id="conteo-comunidad">0</span></button>
+        </div>
+
+        <div class="filtros-secundarios">
+          <div class="filtro-campo">
+            <label for="filtro-derecho">Filtrar por Derecho:</label>
+            <select id="filtro-derecho" class="select-control">
+              <option value="">Todos los derechos</option>
+            </select>
+          </div>
+          <div class="filtro-campo">
+            <label for="filtro-secretaria">Filtrar por Secretaría / Dependencia:</label>
+            <select id="filtro-secretaria" class="select-control">
+              <option value="">Todas las secretarías</option>
+            </select>
+          </div>
+          <button type="button" id="boton-limpiar-filtros" class="boton boton--sutil boton--chico">
+            <span class="icono" aria-hidden="true">filter_alt_off</span>
+            Limpiar filtros
+          </button>
+        </div>
+      </section>
+
+      <!-- Barra de Resultados y Alternador de Vistas -->
+      <div class="barra-resultados">
+        <p class="contador-resultados" id="contador-resultados" aria-live="polite">
+          Cargando recursos...
+        </p>
+        <div class="controles-vista">
+          <div class="grupo-botones-vista" role="group" aria-label="Cambiar formato de visualización">
+            <button type="button" id="vista-tarjetas-btn" class="boton-vista activo" aria-pressed="true">
+              <span class="icono" aria-hidden="true">grid_view</span>
+              Tarjetas
+            </button>
+            <button type="button" id="vista-tabla-btn" class="boton-vista" aria-pressed="false">
+              <span class="icono" aria-hidden="true">table_chart</span>
+              Tabla
+            </button>
+          </div>
+          <button type="button" id="boton-descargar-csv" class="boton boton--sutil boton--chico" title="Descargar datos en formato CSV">
+            <span class="icono" aria-hidden="true">download</span>
+            Descargar CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Contenedor en Tarjetas -->
+      <div id="contenedor-tarjetas" class="grilla-recursos" aria-label="Lista de recursos en formato tarjetas"></div>
+
+      <!-- Contenedor en Tabla -->
+      <div id="contenedor-tabla" class="tabla-recursos-wrapper tabla-scroll" hidden aria-label="Lista de recursos en formato tabla"></div>
+
+      <!-- Mensaje Vacío -->
+      <div id="mensaje-vacio" class="mensaje-vacio" hidden>
+        <span class="icono" aria-hidden="true">search_off</span>
+        <h3>No se encontraron recursos</h3>
+        <p>No se registraron programas que coincidan con la búsqueda o filtros aplicados.</p>
+        <button type="button" id="boton-reintentar-filtros" class="boton boton--primario boton--chico">
+          Restablecer búsqueda
+        </button>
+      </div>
+
+      <!-- Notificación flotante al copiar -->
+      <div id="toast-notificacion" class="toast-notificacion" role="status" aria-live="polite">
+        <span class="icono" aria-hidden="true">check_circle</span>
+        <span id="toast-mensaje">Ficha copiada al portapapeles</span>
+      </div>
+
+      <!-- Ventana Modal de Información de Espacio / Sede -->
+      <div id="modal-espacio-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-espacio-titulo" hidden>
+        <div class="modal-contenido">
+          <div class="modal-header">
+            <div class="modal-header-info">
+              <span class="icono modal-icono-tipo" id="modal-espacio-icono" aria-hidden="true">location_on</span>
+              <div>
+                <span class="badge-tipo-espacio" id="modal-espacio-tipo">Sede Municipal</span>
+                <h2 class="modal-titulo" id="modal-espacio-titulo">Nombre del Espacio</h2>
+              </div>
+            </div>
+            <button type="button" class="modal-boton-cerrar" id="modal-espacio-cerrar" aria-label="Cerrar ventana de información">
+              <span class="icono" aria-hidden="true">close</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-espacio-body">
+            <!-- Contenido dinámico inyectado por tablero.js -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="boton boton--secundario boton--chico" id="modal-boton-copiar">
+              <span class="icono" aria-hidden="true">content_copy</span>
+              Copiar datos de la sede
+            </button>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="boton boton--secundario boton--chico boton--maps" id="modal-link-maps">
+              <img src="assets/img/maps.webp" class="icono-maps" alt="" aria-hidden="true">
+              Abrir en Google Maps
+            </a>
+            <button type="button" class="boton boton--fantasma boton--chico" id="modal-boton-cerrar-pie">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
 
     </div>
   </main>
@@ -86,7 +214,7 @@
   <footer class="pie">
     <div class="contenedor">
       <div class="pie-textos">
-        <p>Equipo de Estadísticas · Gobierno de Río Cuarto</p>
+        <p>Dirección de Estadística, Control de Calidad y Procesos · Secretaría de Gestión y Participación Ciudadana · Gobierno de Río Cuarto</p>
         <p>Fuente: elaboración propia con datos agregados y publicables.</p>
       </div>
       <nav class="enlaces-paginas" aria-label="Páginas de la plantilla">
@@ -95,7 +223,7 @@
     </div>
   </footer>
 
-  <!-- El interruptor de tema y TU lógica. -->
+  <!-- El interruptor de tema y la lógica del tablero. -->
   <script src="js/tema.js"></script>
   <script src="js/tablero.js"></script>
 </body>

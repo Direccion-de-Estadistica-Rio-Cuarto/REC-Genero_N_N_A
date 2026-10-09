@@ -1,8 +1,0 @@
-Mientras este archivo exista, este repo es la plantilla sin instanciar.
-
-scripts/revisar-tablero.sh lo detecta y trata los textos de ejemplo y la
-metadata a medio llenar como AVISO en vez de FALLA — así el repo de la plantilla
-no queda en rojo.
-
-Cuando crees tu tablero a partir de la plantilla: borrá este archivo.
-A partir de ahí, esos controles bloquean de verdad.
