@@ -34,8 +34,11 @@ paths = [
   '''.*\.min\.js''',          # archivos minificados
   '''SECURITY\.md''',         # el propio doc de seguridad muestra ejemplos
   '''\.gitleaks\.toml''',     # este mismo archivo tiene patrones de ejemplo
+  '''datos/.*''',             # datasets agregados públicos del recursero
+  '''scripts/actualizar-.*''', # scripts de descarga de planillas públicas
 ]
 # Palabras que aparecen en ejemplos y no son claves reales.
 regexes = [
   '''(?i)(tu[_\-]?clave|tu[_\-]?token|reemplaza|ejemplo|placeholder|xxxx+)''',
+  '''2PACX-[a-zA-Z0-9_\-]+''', # tokens de URLs públicas de Google Spreadsheets
 ]
